@@ -1,4 +1,24 @@
-# Set Mod+Number keybindings to move windows between workspaces
+# disable dynamic workspace
+gsettings set org.gnome.shell.overrides dynamic-workspaces false
+# Set the maximum number of workspaces to 10
+gsettings set org.gnome.desktop.wm.preferences num-workspaces 10
+
+# disable dock swap
+gsettings set org.gnome.shell.extensions.dash-to-dock hot-keys false
+
+# unbind dock swap (why is this required??)
+gsettings set org.gnome.shell.keybindings switch-to-application-1 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-2 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-3 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-4 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-5 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-6 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-7 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-8 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-9 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-10 "[]"
+
+# bind workspace swap
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-1 "['<Super>1']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-2 "['<Super>2']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-3 "['<Super>3']"
@@ -10,7 +30,7 @@ gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-8 "['<Super>8
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-9 "['<Super>9']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-10 "['<Super>0']"
 
-# Set Mod+Shift+Number keybindings to move windows between workspaces
+# bind workspace move
 gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-1 "['<Super><Shift>1']"
 gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-2 "['<Super><Shift>2']"
 gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-3 "['<Super><Shift>3']"
@@ -22,15 +42,9 @@ gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-8 "['<Super><Sh
 gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-9 "['<Super><Shift>9']"
 gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-10 "['<Super><Shift>0']"
 
-# Disable the dock Mod+1 functionality
-gsettings set org.gnome.shell.extensions.dash-to-dock hot-keys false
 
 # Set Alt+Tab to switch between windows on the current workspace only
-# gsettings set org.gnome.shell.app-switcher current-workspace-only true
+gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
 # turn off animations
 gsettings set org.gnome.desktop.interface enable-animations false
-#
-# Set the maximum number of workspaces to 10
-gsettings set org.gnome.shell.overrides dynamic-workspaces false
-gsettings set org.gnome.desktop.wm.preferences num-workspaces 10
