@@ -1,0 +1,313 @@
+" settings
+
+syntax on
+
+colorscheme jellybeans
+
+set scrolloff=10
+
+" indent
+
+set autoindent
+
+set smartindent 
+
+set tabstop=4
+
+set softtabstop=4
+
+set shiftwidth=4
+
+" set backspace=indent,eol,start
+
+set expandtab
+
+set ai
+
+set number
+
+set hlsearch
+
+set ruler
+
+set hidden
+
+set cursorline
+
+set relativenumber
+
+set number
+
+set ignorecase
+
+" set listchars=tab:▸\ ,trail:·,extends:>,precedes:<,nbsp:%
+
+" set listchars=tab:| ,trail:·,extends:>,precedes:<,nbsp:%
+
+" set listchars=tab:│·,trail:·,extends:→
+
+" highlight SpecialKey ctermfg=grey guifg=grey
+
+" set listchars=tab:>-,trail:~,extends:>,precedes:<
+
+" BEST
+
+set listchars=tab:│\ ,trail:~,extends:→,precedes:<,nbsp:%
+
+" set listchars=tab:│.,trail:~,extends:→,precedes:<,nbsp:%
+
+set list
+
+
+highlight CursorLine cterm=none ctermbg=darkgray guibg=#2e2e2e
+
+highlight CursorLineNr ctermfg=yellow ctermbg=darkgray guifg=#FFD700
+
+" highlight Comment ctermfg=green
+
+
+" netrw
+
+let g:netrw_browse_split = 4 " left vsplit
+
+let g:netrw_winsize = 25
+
+let g:netrw_banner = 0 " enable sidebar
+
+
+" keybinds
+
+let mapleader = " "
+
+
+nnoremap <leader>E :Explore<CR>
+
+nnoremap <leader>e :Lexplore<CR>
+
+autocmd FileType netrw nnoremap <buffer> <Esc> :bd<CR>
+
+
+nnoremap <leader>a :belowright 10split term://bash<CR>
+
+nnoremap <leader>v :vnew<CR>
+
+nnoremap <leader>V :vertical terminal<CR>
+
+
+nnoremap <leader>g :noh<CR>
+
+nnoremap <leader>w :w<CR>
+
+nnoremap <leader>n :new<CR>
+
+nnoremap <leader>q :q<CR>
+
+
+nnoremap <C-h> :wincmd h<CR>
+
+nnoremap <C-j> :wincmd j<CR>
+
+nnoremap <C-k> :wincmd k<CR>
+
+nnoremap <C-l> :wincmd l<CR>
+
+nnoremap <leader>H :wincmd H<CR>
+
+nnoremap <leader>J :wincmd J<CR>
+
+nnoremap <leader>K :wincmd K<CR>
+
+nnoremap <leader>L :wincmd L<CR>
+
+nnoremap <C-Left>   :vertical resize -5<CR>
+
+nnoremap <C-Right>  :vertical resize +5<CR>
+
+nnoremap <C-Up>     :resize +5<CR>
+
+nnoremap <C-Down>   :resize -5<CR>
+
+nnoremap <Esc>[1;5D :vertical resize -5<CR>
+
+nnoremap <Esc>[1;5C :vertical resize +5<CR>
+
+nnoremap <Esc>[1;5A :resize +5<CR>
+
+nnoremap <Esc>[1;5B :resize -5<CR>
+
+
+" remaps
+
+cnoremap <silent><expr> <enter> index(['/', '?'], getcmdtype()) >= 0 ? '<enter>zz' : '<enter>'
+
+nnoremap <C-u> <C-u>zz
+
+nnoremap <C-d> <C-d>zz
+
+nnoremap <C-o> <C-o>zz
+
+nnoremap <C-i> <C-i>zz
+
+
+vnoremap < <gv
+
+vnoremap > >gv
+
+
+" buffer
+
+nnoremap <leader>l :bnext<CR>
+
+nnoremap <leader>h :bprevious<CR>
+
+
+nnoremap <leader>c :tabc<CR>
+
+nnoremap <leader>t :tabnew<CR>
+
+
+" comment
+
+augroup commenting_blocks_of_code
+
+        autocmd!
+
+        autocmd FileType c,cc,cpp,zig,java,scala    let b:comment_leader = '// '
+
+        autocmd FileType sh,ruby,python             let b:comment_leader = '# '
+
+        autocmd FileType conf,fstab                 let b:comment_leader = '# '
+
+        autocmd FileType tex                        let b:comment_leader = '% '
+
+        autocmd FileType mail                       let b:comment_leader = '> '
+
+        autocmd FileType vim                        let b:comment_leader = '" '
+
+augroup END
+
+noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
+
+noremap <silent> ,cv :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
+
+
+" grep
+
+nnoremap <leader>st :call InputVimSearchRightBar()<CR>
+
+
+function! VimInRightBar(search_term)
+
+    execute 'vim /' . a:search_term . '/g %'
+
+    " vert rightbelow copen
+
+    copen
+
+    " wincmd L
+
+    " vertical resize 40
+
+endfunction
+
+
+function! InputVimSearchRightBar()
+
+    let l:search_term = input('Search for: ')
+
+    if !empty(l:search_term)
+
+        call VimInRightBar(l:search_term)
+
+    endif
+
+endfunction
+
+
+" tabline
+
+set showtabline=2 " enable tabline
+
+set tabline=%!MyTabLine()
+
+
+function! MyTabLine()
+
+    let s = ''
+
+    for i in range(tabpagenr('$'))
+
+        let s .= '%' . (i + 1) . 'T'
+
+        if i + 1 == tabpagenr()
+
+            let s .= '%#TabLineSel#'
+
+        else
+
+            let s .= '%#TabLine#'
+
+        endif
+
+        let s .= ' ' . (i + 1) . ': ' . fnamemodify(bufname(tabpagebuflist(i + 1)[tabpagewinnr(i + 1) - 1]), ':t') . ' '
+
+    endfor
+
+    return s
+
+endfunction
+
+
+" FZF
+
+nnoremap <leader>f :call FindFiles()<CR>
+
+
+" Function to find files in the current directory
+
+function! FindFiles()
+
+    " Get a list of files in the current directory
+
+    let l:files = split(glob('**/*'), "\n")
+
+    
+
+    " Prompt for the filename
+
+    let l:input = input('Search for: ')
+
+    
+
+    " Filter the files based on the input
+
+    let l:matches = filter(l:files, 'v:val =~ l:input')
+
+
+    " If matches are found, display them
+
+    if !empty(l:matches)
+
+        " Create a list of matches
+
+        call inputlist(l:matches)
+
+        
+
+        " Open the selected file if any
+
+        let l:selected = get(g:, 'inputlist', -1)
+
+        if l:selected >= 0
+
+            execute 'edit ' . fnameescape(l:matches[l:selected])
+
+        endif
+
+    else
+
+        echo "No matches found."
+
+    endif
+
+endfunction
