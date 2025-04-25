@@ -1,0 +1,49 @@
+# for this to work you must configure sudo such that
+# it will be able to run the command without password
+
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+# bsp, stack or float
+yabai -m config layout float
+
+yabai -m config window_placement second_child
+
+# window modifications
+yabai -m config window_topmost off
+yabai -m config window_shadow float # removes shadows
+
+yabai -m config window_opacity on
+yabai -m config active_window_opacity 1.0
+# yabai -m config normal_window_opacity 0.9
+yabai -m config normal_window_opacity 1.0
+
+# spacebar
+
+# SPACEBAR_HEIGHT=$(spacebar -m config height)
+# yabai -m config external_bar all:0:$SPACEBAR_HEIGHT
+# yabai -m config external_bar all:0:26
+
+
+# mouse settings
+yabai -m config mouse_follows_focus on
+# yabai -m config focus_follows_mouse autoraise 
+
+yabai -m config mouse_modifier alt
+# left click + drag
+yabai -m config mouse_action1 move
+#right click + drag
+yabai -m config mouse_action2 resize
+
+# yabai -m mouse_drop_action swa
+
+# rules
+yabai -m rule --add app="^Stats$" manage=off
+yabai -m rule --add app="^System Settings$" manage=off 
+
+# yabai -m rule --add app="^Firefox$" space=1
+# yabai -m rule --add app="^iTerm$" space=2
+# yabai -m rule --add app="^Obsidian$" space=3
+# yabai -m rule --add app="^Discord$" space=4
+# yabai -m rule --add app="^Spotify$" space=5
+
