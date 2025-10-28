@@ -32,17 +32,15 @@ lvim.keys.normal_mode["<leader>j"] = "<C-W>j"
 lvim.keys.normal_mode["<leader>k"] = "<C-W>k"
 lvim.keys.normal_mode["<leader>l"] = "<C-W>l"
  
-lvim.keys.normal_mode["<leader>H"] = "<C-W>H"
-lvim.keys.normal_mode["<leader>J"] = "<C-W>J"
-lvim.keys.normal_mode["<leader>K"] = "<C-W>K"
-lvim.keys.normal_mode["<leader>L"] = "<C-W>L"
+lvim.keys.normal_mode["H"] = ":bprev<CR>"
+lvim.keys.normal_mode["L"] = ":bnext<CR>"
  
 lvim.keys.normal_mode["<C-u>"] = "<C-u>zz"
 lvim.keys.normal_mode["<C-d>"] = "<C-d>zz"
  
 -- default, elflord, industry, torte, koehler, murphy
 -- challenger_deep, atom
-lvim.colorscheme = "vim"
+lvim.colorscheme = "gruvbox"
 lvim.autocommands = {
     { "ColorScheme", { pattern = { "*" }, command = "highlight Pmenu ctermbg=NONE guibg=NONE" } },
     { "ColorScheme", { pattern = { "*" }, command = "highlight FloatBorder ctermbg=NONE guibg=NONE" } },
