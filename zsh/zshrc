@@ -1,0 +1,37 @@
+alias nv=nvim
+alias lv=nvim
+alias lg=lazygit
+
+# git
+alias gap="git add -p"
+alias gc="git commit"
+alias gcm="git commit -m"
+alias gp="git push"
+alias gpu="git pull"
+alias gck="git checkout"
+
+#esp idf
+alias get_idf='. $HOME/Documents/esp/esp-idf/export.sh'
+
+# macro to activate python venv
+vsrc() {
+    source "${1:-.venv}/bin/activate"
+}
+
+# macro to cat all files for chat gpt
+printfiles() {
+    out="$1"
+    [ -z "$out" ] && { echo "usage: printfiles <output-file>"; return 1; }
+
+    : > "$out"  # truncate or create
+
+    for f in *; do
+        [ "$f" = "$out" ] && continue
+        [ -f "$f" ] || continue
+        {
+            printf "%s\n\`\`\`\n" "$f"
+            cat "$f"
+            printf "\`\`\`\n\n"
+        } >> "$out"
+    done
+}
