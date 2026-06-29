@@ -20,18 +20,18 @@ vsrc() {
 
 # macro to cat all files for chat gpt
 printfiles() {
-    out="$1"
-    [ -z "$out" ] && { echo "usage: printfiles <output-file>"; return 1; }
-
-    : > "$out"  # truncate or create
-
-    for f in *; do
-        [ "$f" = "$out" ] && continue
-        [ -f "$f" ] || continue
-        {
-            printf "%s\n\`\`\`\n" "$f"
-            cat "$f"
-            printf "\`\`\`\n\n"
-        } >> "$out"
-    done
+  out="$1"
+  [ -z "$out" ] && { echo "usage: printfiles <output-file>"; return 1; }
+  : > "$out"
+  find . -type f \
+    -not -path '*/.git/*' \
+    -not -path '*/node_modules/*' \
+    -not -path "./$out" | sed 's|^\./||' | sort | while IFS= read -r f; do
+    {
+      printf '%s\n```\n' "$f"
+      cat "$f"
+      printf '```\n\n'
+    } >> "$out"
+  done
 }
+
